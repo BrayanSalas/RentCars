@@ -3,7 +3,8 @@ package markintoch.rentcar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,14 +13,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
 
+import markintoch.rentcar.RecyclerCarros.RecyclerActivity;
+
 @SuppressWarnings("serial")
 public class SearchActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, Serializable {
-
+    private FirebaseAuth mAuth;
     String estab[];
     int position;
     Button buttonBuscar;
@@ -32,7 +36,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
+        mAuth = FirebaseAuth.getInstance();
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         estab = getResources().getStringArray(R.array.establecimientos);
         spinner.setOnItemSelectedListener(this);
@@ -77,6 +81,28 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                mAuth.signOut();
+                Toast.makeText(this, "La sesión ha sido cerrada", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(SearchActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {

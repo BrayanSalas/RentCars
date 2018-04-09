@@ -1,7 +1,9 @@
 package markintoch.rentcar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText email,password;
     Button registro,login;
     FirebaseAuth.AuthStateListener authListener;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,20 +32,37 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         registro = (Button) findViewById(R.id.BotonRegister);
         login = (Button) findViewById(R.id.BotonLogin);
+
+        //----------------------AUTENTICACION DE USUARIOS DE FIREBASE-----------------------
+        mAuth = FirebaseAuth.getInstance();
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser usuario = firebaseAuth.getCurrentUser(); //Se verifica el estado de la sesion
                 if(usuario != null){
-                    Toast.makeText(getApplicationContext(),"Sesion iniciada como "+usuario.getEmail(),Toast.LENGTH_SHORT).show(); //Del objeto usuario, se trae el email con el que esta autenticado
-                    Intent i = new Intent(LoginActivity.this,SearchActivity.class);
-                    startActivity(i);
-                    android.os.Process.killProcess(android.os.Process.myPid()); //Mata el proceso actual, cierra el activity
-                }else{
-                    Toast.makeText(getApplicationContext(),"No hay sesion iniciada",Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    builder.setMessage("Desea continuar como "+usuario.getEmail()).setTitle("Inicio de sesión");
+                    builder.setPositiveButton("Esta bien", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent i = new Intent(LoginActivity.this,SearchActivity.class);
+                            startActivity(i);
+                            android.os.Process.killProcess(android.os.Process.myPid()); //Mata el proceso actual, cierra el activity
+                        }
+                    });
+                    builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Toast.makeText(LoginActivity.this, "La sesión ha sido cerrada", Toast.LENGTH_SHORT).show();
+                            mAuth.signOut();
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
             }
         };
+
+        //----------------------INICIO DE SESION DE USUARIOS DE FIREBASE-----------------------
         FirebaseAuth.getInstance().addAuthStateListener(authListener); //Establece que existe una autenticacion activa de acuerdo si existe un usuario
         login.setOnClickListener(new View.OnClickListener() {
             @Override

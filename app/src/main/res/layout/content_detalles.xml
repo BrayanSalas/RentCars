@@ -5,12 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="markintoch.rentcar.DetallesActivity"
+    tools:context="markintoch.rentcar.RecyclerDetalles.DetallesActivity"
     tools:showIn="@layout/activity_detalles">
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:/>
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardBackgroundColor="#E2E2E2"
+        card_view:cardCornerRadius="4dp">
+
+        <ImageView
+            android:id="@+id/imageViewPoster"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:scaleType="centerCrop"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTitle"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@+id/imageView"
+            android:layout_marginLeft="@+id/imageView"
+            android:textSize="24dp"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_gravity="bottom">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/textViewDescription"
+                android:textSize="20dp"
+                />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
 
 </android.support.v4.widget.NestedScrollView>

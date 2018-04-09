@@ -1,4 +1,4 @@
-package markintoch.rentcar;
+package markintoch.rentcar.RecyclerCarros;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import markintoch.rentcar.Objetos.Carro;
+import markintoch.rentcar.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private List<Carro> carros;

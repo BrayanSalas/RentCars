@@ -1,15 +1,17 @@
-package markintoch.rentcar;
+package markintoch.rentcar.RecyclerCarros;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import markintoch.rentcar.RecyclerDetalles.DetallesActivity;
+import markintoch.rentcar.Objetos.Carro;
+import markintoch.rentcar.R;
 
 public class RecyclerActivity extends AppCompatActivity {
     private List<Carro> carros;
@@ -91,7 +93,7 @@ public class RecyclerActivity extends AppCompatActivity {
     private List<Carro> getAllCarrosSC(){
         return new ArrayList<Carro>(){{
             add(new Carro("Nissan Sonic LT", "https://acs2.blob.core.windows.net/imgcatalogo/xl/VA_07ae4efc62c841eab82d8db56d957413.jpg", "4", "arena", "2017", "ac", "manual", "5", "desc", "1000"));
-            add(new Carro("Nissan Sonic", "http://territorioinformativo.com/wp-content/uploads/2016/09/sonic_TerritorioInformativo.jpg",  "4", "blue", "2010", "ac", "auto", "4", "desc", "2000"));
+                add(new Carro("Nissan Sonic", "http://territorioinformativo.com/wp-content/uploads/2016/09/sonic_TerritorioInformativo.jpg",  "4", "blue", "2010", "ac", "auto", "4", "desc", "2000"));
             add(new Carro("Ford Mustang", "https://s.aolcdn.com/commerce/autodata/images/USC50FOC051B021001.jpg",  "2", "negro", "2016", "ac", "manual", "4", "desc", "3000"));
             add(new Carro("Nissan Tiida", "https://acs2.blob.core.windows.net/imgcatalogo/l/VA_d2fce277d4ea49198845e0003b0498d5.jpg",  "4", "blanco", "2016", "ac", "auto", "4", "desc", "4000"));
         }};

@@ -19,11 +19,11 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SearchActivity" />
         <activity
-            android:name=".RecyclerActivity"
+            android:name=".RecyclerCarros.RecyclerActivity"
             android:label="@string/title_activity_recycler"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DetallesActivity"
+            android:name=".RecyclerDetalles.DetallesActivity"
             android:label="@string/title_activity_detalles"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

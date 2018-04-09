@@ -1,8 +1,4 @@
-package markintoch.rentcar;
-
-/**
- * Created by maste on 06/04/2018.
- */
+package markintoch.rentcar.Objetos;
 
 public class Usuario {
     String nombre, correo, password, username;
